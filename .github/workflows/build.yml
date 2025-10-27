@@ -22,10 +22,9 @@ jobs:
         run: |
           export GOOS=linux
           export GOARCH=amd64
-          export CGO_ENABLED=1
           go build -v -o wireguard-go \
+            -tags netgo -ldflags "-extldflags -static -s -w" \
             -trimpath \
-            -ldflags "-s -w" \
             ./  
 
       - name: Upload artifact
